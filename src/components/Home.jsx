@@ -47,14 +47,6 @@ function Home() {
           misc
         </button>
 
-        {/* Menu Button - Blue, upper-right pointing to hanging lamp */}
-        <button
-          onClick={() => navigate('/menu')}
-          className="absolute right-16 top-16 bg-blue-500 hover:bg-blue-600 text-white px-16 py-10 rounded-lg font-semibold transition-all duration-200 shadow-lg text-3xl"
-        >
-          menu
-        </button>
-
         {/* Character Work Button - Teal, far right over seated black figure */}
         <button
           onClick={() => navigate('/character-work')}

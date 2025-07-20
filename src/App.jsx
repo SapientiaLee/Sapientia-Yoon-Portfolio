@@ -3,7 +3,6 @@ import Home from './components/Home'
 import Concept from './pages/Concept'
 import Observational from './pages/Observational'
 import Misc from './pages/Misc'
-import Menu from './pages/Menu'
 import CharacterWork from './pages/CharacterWork'
 import About from './pages/About'
 import Nav from './components/Nav'
@@ -19,7 +18,6 @@ function App() {
           <Route path="/concept" element={<Concept />} />
           <Route path="/observational" element={<Observational />} />
           <Route path="/misc" element={<Misc />} />
-          <Route path="/menu" element={<Menu />} />
           <Route path="/character-work" element={<CharacterWork />} />
           <Route path="/about" element={<About />} />
         </Routes>

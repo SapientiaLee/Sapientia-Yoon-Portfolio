@@ -5,6 +5,7 @@ function Nav() {
   const navigate = useNavigate()
   const location = useLocation()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const isActive = (path) => {
     return location.pathname === path
@@ -14,9 +15,14 @@ function Nav() {
     setIsMenuOpen(!isMenuOpen)
   }
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen)
+  }
+
   const handleNavClick = (path) => {
     navigate(path)
     setIsMenuOpen(false)
+    setIsDropdownOpen(false)
   }
 
   return (
@@ -49,55 +55,65 @@ function Nav() {
         <div className={`${isMenuOpen ? 'block' : 'hidden'} w-full md:block md:w-auto`} id="navbar-default">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             
-            <li>
+            {/* Portfolio Dropdown */}
+            <li className="relative">
               <button
-                onClick={() => handleNavClick('/concept')}
-                className={`block py-2 px-3 rounded-sm md:bg-transparent md:p-0 ${
-                  isActive('/concept') 
-                    ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500' 
-                    : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent'
-                }`}
+                onClick={toggleDropdown}
+                className="flex items-center py-2 px-3 rounded-sm md:bg-transparent md:p-0 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
-                Concept
+                Portfolio
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
               </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleNavClick('/observational')}
-                className={`block py-2 px-3 rounded-sm md:bg-transparent md:p-0 ${
-                  isActive('/observational') 
-                    ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500' 
-                    : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent'
-                }`}
-              >
-                Observational
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleNavClick('/misc')}
-                className={`block py-2 px-3 rounded-sm md:bg-transparent md:p-0 ${
-                  isActive('/misc') 
-                    ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500' 
-                    : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent'
-                }`}
-              >
-                Misc
-              </button>
+              
+              {/* Dropdown Menu */}
+              <div className={`${isDropdownOpen ? 'block' : 'hidden'} absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 z-50`}>
+                <ul className="py-2">
+                  <li>
+                    <button
+                      onClick={() => handleNavClick('/concept')}
+                      className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                        isActive('/concept') ? 'text-blue-700 bg-blue-50 dark:text-blue-400 dark:bg-gray-700' : 'text-gray-700 dark:text-gray-300'
+                      }`}
+                    >
+                      Concept
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleNavClick('/observational')}
+                      className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                        isActive('/observational') ? 'text-blue-700 bg-blue-50 dark:text-blue-400 dark:bg-gray-700' : 'text-gray-700 dark:text-gray-300'
+                      }`}
+                    >
+                      Observational
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleNavClick('/misc')}
+                      className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                        isActive('/misc') ? 'text-blue-700 bg-blue-50 dark:text-blue-400 dark:bg-gray-700' : 'text-gray-700 dark:text-gray-300'
+                      }`}
+                    >
+                      Misc
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleNavClick('/character-work')}
+                      className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                        isActive('/character-work') ? 'text-blue-700 bg-blue-50 dark:text-blue-400 dark:bg-gray-700' : 'text-gray-700 dark:text-gray-300'
+                      }`}
+                    >
+                      Character Work
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </li>
             
-            <li>
-              <button
-                onClick={() => handleNavClick('/character-work')}
-                className={`block py-2 px-3 rounded-sm md:bg-transparent md:p-0 ${
-                  isActive('/character-work') 
-                    ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500' 
-                    : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent'
-                }`}
-              >
-                Character Work
-              </button>
-            </li>
             <li>
               <button
                 onClick={() => handleNavClick('/about')}
